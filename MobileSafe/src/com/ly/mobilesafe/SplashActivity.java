@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -51,16 +52,31 @@ public class SplashActivity extends Activity {
 	
 	private TextView tv_splash_version;
 	private TextView tv_update_info;
+	private SharedPreferences sp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
+		
 		tv_splash_version = (TextView) findViewById(R.id.tv_splash_version);
 		tv_update_info = (TextView) findViewById(R.id.tv_update_info);
-		
 		tv_splash_version.setText("版本号："+getVersionName());
-		checkUpdate();
+		boolean update = sp.getBoolean("update", false);
+		if(update)
+		{
+			checkUpdate();
+		}else{
+			//自动升级已经关闭
+			handler.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					enterHome();
+				}
+			}, 2000);
+		}
 		AlphaAnimation aa = new AlphaAnimation(0.2f, 1.0f);
 		aa.setDuration(500);
 		findViewById(R.id.rl_root_splash).startAnimation(aa);
