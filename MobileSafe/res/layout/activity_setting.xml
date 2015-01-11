@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lying="http://schemas.android.com/apk/res/com.ly.mobilesafe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,6 +14,9 @@
         android:textColor="#000000"
         android:textSize="22sp" />
     <com.ly.mobilesafe.ui.SettingItemView 
+        lying:title="设置自动更新"
+        lying:desc_on="设置自动更新已经开启"
+        lying:desc_off="设置自动更新已经关闭"
         android:id="@+id/siv_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
