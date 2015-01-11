@@ -37,6 +37,7 @@ public class SettingItemView extends RelativeLayout {
 		setTitle(title);
 		desc_on = attrs.getAttributeValue("http://schemas.android.com/apk/res/com.ly.mobilesafe", "desc_on");
 		desc_off = attrs.getAttributeValue("http://schemas.android.com/apk/res/com.ly.mobilesafe", "desc_off");
+		setDesc(desc_off);
 	}
 
 	public SettingItemView(Context context) {
@@ -73,5 +74,13 @@ public class SettingItemView extends RelativeLayout {
 	public void setTitle(String text)
 	{
 		tv_title.setText(text);
+	}
+	
+	/**
+	 * 
+	 */
+	public void setDesc(String desc)
+	{
+		tv_desc.setText(desc);
 	}
 }

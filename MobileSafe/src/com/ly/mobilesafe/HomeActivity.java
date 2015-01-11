@@ -1,24 +1,39 @@
 package com.ly.mobilesafe;
 
+import com.ly.mobilesafe.R.string;
+import com.ly.mobilesafe.utils.MD5Utils;
+
 import android.os.Bundle;
 import android.renderscript.Mesh.Primitive;
+import android.text.TextUtils;
+import android.util.Log;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends Activity {
 
+	protected static final String TAG = "HomeActivity";
+	
 	private GridView list_home;
 	private ToolListAdapter adapter;
+	private SharedPreferences sp;
 	
 	private static String[] names = {
 		"手机防盗","通讯卫士","软件管理",
@@ -35,7 +50,7 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		list_home = (GridView) findViewById(R.id.list_home);
 		adapter = new ToolListAdapter();
 		list_home.setAdapter(adapter);
@@ -45,6 +60,9 @@ public class HomeActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				switch (position) {
+				case 0: //进入手机防盗页面
+					showLostFindDialog();
+					break;
 				case 8:
 					Intent intent = new Intent(HomeActivity.this,SettingActivity.class);
 					startActivity(intent);
@@ -57,6 +75,122 @@ public class HomeActivity extends Activity {
 			
 		});
 		
+	}
+
+	protected void showLostFindDialog() {
+		//判断是否设置过密码
+		if(isSetupPwd())
+		{
+			showEnterDialog();
+		}else{
+			showSetupPwdDialog();
+		}
+	}
+
+	private EditText et_setup_pwd;
+	private EditText et_setup_confirm;
+	private Button btnOk;
+	private Button btnCancel;
+	private AlertDialog dialog;
+	/**
+	 * 设置密码对话框 
+	 */
+	private void showSetupPwdDialog() {
+//		EditText et_setup_pwd;
+//		Button btnOk;
+//		Button btnCancel;
+		
+		AlertDialog.Builder builder = new Builder(HomeActivity.this);
+		View view = View.inflate(HomeActivity.this, R.layout.dialog_setup_password, null);
+		et_setup_pwd = (EditText) view.findViewById(R.id.et_setup_pwd);
+		et_setup_confirm = (EditText) view.findViewById(R.id.et_setup_confirm);
+		btnOk = (Button) view.findViewById(R.id.ok);
+		btnCancel = (Button) view.findViewById(R.id.cancel);
+		dialog = builder.create();
+		dialog.setView(view,0,0,0,0);
+		dialog.show();
+		btnOk.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String password = et_setup_pwd.getText().toString().trim();
+				String pwd_confirm = et_setup_confirm.getText().toString().trim();
+				if(TextUtils.isEmpty(password)||TextUtils.isEmpty(pwd_confirm))
+				{
+					Toast.makeText(HomeActivity.this, "密码为空", 0).show();
+					return;
+				}
+				//判断是否一致才去保存
+				if(password.equals(pwd_confirm))
+				{
+					Editor editor = sp.edit();
+					editor.putString("password", MD5Utils.md5Password(password));
+					editor.commit();
+					dialog.dismiss();
+					Log.i(TAG, "把对话框消掉，进入手机防盗页面");
+					Intent intent = new Intent(HomeActivity.this,LostFindActivity.class);
+					startActivity(intent);
+				}else{
+					Toast.makeText(HomeActivity.this, "密码不一致", 0).show();
+					return ;
+				}
+			}
+		});
+		btnCancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		
+	}
+
+	private void showEnterDialog() {
+		AlertDialog.Builder builder = new Builder(HomeActivity.this);
+		View view = View.inflate(HomeActivity.this, R.layout.dialog_enter_password, null);
+		dialog = builder.create();
+		dialog.setView(view, 0, 0, 0, 0);
+		dialog.show();
+		et_setup_pwd = (EditText) view.findViewById(R.id.et_setup_pwd);
+		btnOk = (Button) view.findViewById(R.id.ok);
+		btnCancel = (Button) view.findViewById(R.id.cancel);
+		btnOk.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String password = et_setup_pwd.getText().toString().trim();
+				String savePassword = sp.getString("password", "");
+				if(TextUtils.isEmpty(password)){
+					Toast.makeText(HomeActivity.this, "密码为空", 1).show();
+					return;
+				}
+				
+				if(MD5Utils.md5Password(password).equals(savePassword)){
+					//输入的密码是我之前设置的密码
+					//把对话框消掉，进入主页面；
+					dialog.dismiss();
+					Log.i(TAG, "把对话框消掉，进入手机防盗页面");
+					Intent intent = new Intent(HomeActivity.this,LostFindActivity.class);
+					startActivity(intent);
+					
+				}else{
+					Toast.makeText(HomeActivity.this, "密码错误", 1).show();
+					et_setup_pwd.setText("");
+					return;
+				}
+			}
+		});
+		btnCancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+	}
+
+	private boolean isSetupPwd() {
+		String password = sp.getString("password", null);
+		return !TextUtils.isEmpty(password);
 	}
 
 	private class ToolListAdapter extends BaseAdapter{
