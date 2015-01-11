@@ -7,5 +7,10 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="titlestr">功能列表</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_lost_find">LostFindActivity</string>
+    <string name="title_activity_setup1">Setup1Activity</string>
+    <string name="title_activity_setup2">Setup2Activity</string>
+    <string name="title_activity_setup3">Setup3Activity</string>
+    <string name="title_activity_setup4">Setup4Activity</string>
 
 </resources>
