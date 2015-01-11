@@ -26,11 +26,9 @@ public class SettingActivity extends Activity {
 		{
 			//自动升级已经开启
 			siv_update.setChecked(true);
-			siv_update.setDesc("自动升级已经开启");
 		}else{
 			//自动升级已经关闭
 			siv_update.setChecked(false);
-			siv_update.setDesc("自动升级已经关闭");
 		}
 		
 		siv_update.setOnClickListener(new OnClickListener() {
@@ -41,12 +39,10 @@ public class SettingActivity extends Activity {
 				if(siv_update.isChecked())
 				{
 					siv_update.setChecked(false);
-					siv_update.setDesc("自动升级已经关闭");
 					editor.putBoolean("update", false);
 					
 				}else{
 					siv_update.setChecked(true);
-					siv_update.setDesc("自动升级已经开启");
 					editor.putBoolean("update",true);
 				}
 				editor.commit();
