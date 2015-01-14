@@ -20,6 +20,7 @@
         style="@style/text_content_style"
         android:text="sim卡变更后\n报警短信会发给安全号码" />
 	 <EditText
+	    android:id="@+id/et_setup3_phone"
         android:hint="请输入电话号码"
         android:inputType="phone"
         android:layout_width="fill_parent"
@@ -28,6 +29,7 @@
     <Button
         android:background="@drawable/button_bg"
         android:text="选择联系人"
+        android:onClick="selectContact"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
        />
