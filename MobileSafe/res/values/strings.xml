@@ -13,5 +13,7 @@
     <string name="title_activity_setup3">Setup3Activity</string>
     <string name="title_activity_setup4">Setup4Activity</string>
     <string name="title_activity_select_contact">SelectContactActivity</string>
+    <string name="sample_device_admin">phone lock</string>
+    <string name="admindesc">一键锁屏</string>
 
 </resources>

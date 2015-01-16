@@ -14,6 +14,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -57,17 +61,33 @@
             android:name="com.ly.mobilesafe.Setup4Activity"
             android:label="@string/title_activity_setup4" >
         </activity>
+        <activity
+            android:name="com.ly.mobilesafe.SelectContactActivity"
+            android:label="@string/title_activity_select_contact" >
+        </activity>
+        
+        <service android:name=".service.GPSService"/>
 
         <receiver android:name="com.ly.mobilesafe.receiver.BootCompleteReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name="com.ly.mobilesafe.SelectContactActivity"
-            android:label="@string/title_activity_select_contact" >
-        </activity>
+         <receiver android:name=".receiver.SMSReceiver">
+            <intent-filter android:priority="1000" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+		<receiver android:name=".receiver.DeviceAdminSample"
+        	android:label="@string/sample_device_admin"
+        	android:description="@string/admindesc"
+        	android:permission="android.permission.BIND_DEVICE_ADMIN">
+   			 <meta-data android:name="android.app.device_admin"
+            	android:resource="@xml/admin_metadata" />
+    		<intent-filter>
+        		<action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+    		</intent-filter>
+		</receiver>
     </application>
 
 </manifest>
