@@ -9,10 +9,12 @@ package com.ly.mobilesafe;
 
 public final class R {
     public static final class anim {
-        public static final int tran_next_in=0x7f040000;
-        public static final int tran_next_out=0x7f040001;
-        public static final int tran_pre_in=0x7f040002;
-        public static final int tran_pre_out=0x7f040003;
+        public static final int cycle_7=0x7f040000;
+        public static final int shake=0x7f040001;
+        public static final int tran_next_in=0x7f040002;
+        public static final int tran_next_out=0x7f040003;
+        public static final int tran_pre_in=0x7f040004;
+        public static final int tran_pre_out=0x7f040005;
     }
     public static final class attr {
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -80,58 +82,64 @@ containing a value of this type.
         public static final int unlock=0x7f02001a;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0018;
-        public static final int cancel=0x7f0b0011;
-        public static final int cb_protecting=0x7f0b0009;
-        public static final int cb_status=0x7f0b0017;
-        public static final int et_setup3_phone=0x7f0b0008;
-        public static final int et_setup_confirm=0x7f0b0012;
-        public static final int et_setup_pwd=0x7f0b000f;
-        public static final int iv_item=0x7f0b0013;
+        public static final int action_settings=0x7f0b001a;
+        public static final int cancel=0x7f0b0013;
+        public static final int cb_protecting=0x7f0b000b;
+        public static final int cb_status=0x7f0b0019;
+        public static final int et_phone=0x7f0b0005;
+        public static final int et_setup3_phone=0x7f0b000a;
+        public static final int et_setup_confirm=0x7f0b0014;
+        public static final int et_setup_pwd=0x7f0b0011;
+        public static final int iv_item=0x7f0b0015;
         public static final int iv_protecting=0x7f0b0004;
-        public static final int list_home=0x7f0b0001;
-        public static final int list_select_contact=0x7f0b0005;
-        public static final int ok=0x7f0b0010;
-        public static final int rl_root_splash=0x7f0b000a;
-        public static final int siv_setupt_sim=0x7f0b0007;
-        public static final int siv_update=0x7f0b0006;
-        public static final int textView1=0x7f0b0002;
-        public static final int tvTitle=0x7f0b0000;
-        public static final int tv_desc=0x7f0b0016;
-        public static final int tv_item=0x7f0b0014;
-        public static final int tv_name=0x7f0b000d;
-        public static final int tv_phone=0x7f0b000e;
+        public static final int list_home=0x7f0b0002;
+        public static final int list_select_contact=0x7f0b0007;
+        public static final int ok=0x7f0b0012;
+        public static final int rl_root_splash=0x7f0b000c;
+        public static final int siv_setupt_sim=0x7f0b0009;
+        public static final int siv_update=0x7f0b0008;
+        public static final int textView1=0x7f0b0000;
+        public static final int tvTitle=0x7f0b0001;
+        public static final int tv_desc=0x7f0b0018;
+        public static final int tv_item=0x7f0b0016;
+        public static final int tv_name=0x7f0b000f;
+        public static final int tv_phone=0x7f0b0010;
+        public static final int tv_result=0x7f0b0006;
         public static final int tv_safenumber=0x7f0b0003;
-        public static final int tv_splash_version=0x7f0b000b;
-        public static final int tv_title=0x7f0b0015;
-        public static final int tv_update_info=0x7f0b000c;
+        public static final int tv_splash_version=0x7f0b000d;
+        public static final int tv_title=0x7f0b0017;
+        public static final int tv_update_info=0x7f0b000e;
     }
     public static final class layout {
-        public static final int activity_home=0x7f030000;
-        public static final int activity_lost_find=0x7f030001;
-        public static final int activity_select_contact=0x7f030002;
-        public static final int activity_setting=0x7f030003;
-        public static final int activity_setup1=0x7f030004;
-        public static final int activity_setup2=0x7f030005;
-        public static final int activity_setup3=0x7f030006;
-        public static final int activity_setup4=0x7f030007;
-        public static final int activity_splash=0x7f030008;
-        public static final int contact_item_view=0x7f030009;
-        public static final int dialog_enter_password=0x7f03000a;
-        public static final int dialog_setup_password=0x7f03000b;
-        public static final int list_item_home=0x7f03000c;
-        public static final int setting_item_view=0x7f03000d;
+        public static final int activity_atools=0x7f030000;
+        public static final int activity_home=0x7f030001;
+        public static final int activity_lost_find=0x7f030002;
+        public static final int activity_number_address_query=0x7f030003;
+        public static final int activity_select_contact=0x7f030004;
+        public static final int activity_setting=0x7f030005;
+        public static final int activity_setup1=0x7f030006;
+        public static final int activity_setup2=0x7f030007;
+        public static final int activity_setup3=0x7f030008;
+        public static final int activity_setup4=0x7f030009;
+        public static final int activity_splash=0x7f03000a;
+        public static final int contact_item_view=0x7f03000b;
+        public static final int dialog_enter_password=0x7f03000c;
+        public static final int dialog_setup_password=0x7f03000d;
+        public static final int list_item_home=0x7f03000e;
+        public static final int setting_item_view=0x7f03000f;
     }
     public static final class menu {
-        public static final int home=0x7f0a0000;
-        public static final int lost_find=0x7f0a0001;
-        public static final int select_contact=0x7f0a0002;
-        public static final int setting=0x7f0a0003;
-        public static final int setup1=0x7f0a0004;
-        public static final int setup2=0x7f0a0005;
-        public static final int setup3=0x7f0a0006;
-        public static final int setup4=0x7f0a0007;
-        public static final int splash=0x7f0a0008;
+        public static final int atools=0x7f0a0000;
+        public static final int home=0x7f0a0001;
+        public static final int lost_find=0x7f0a0002;
+        public static final int number_address_query=0x7f0a0003;
+        public static final int select_contact=0x7f0a0004;
+        public static final int setting=0x7f0a0005;
+        public static final int setup1=0x7f0a0006;
+        public static final int setup2=0x7f0a0007;
+        public static final int setup3=0x7f0a0008;
+        public static final int setup4=0x7f0a0009;
+        public static final int splash=0x7f0a000a;
     }
     public static final class raw {
         public static final int ylzs=0x7f060000;
@@ -143,8 +151,10 @@ containing a value of this type.
         public static final int hello_world=0x7f070003;
         public static final int sample_device_admin=0x7f07000d;
         public static final int serverurl=0x7f070000;
+        public static final int title_activity_atools=0x7f07000f;
         public static final int title_activity_home=0x7f070004;
         public static final int title_activity_lost_find=0x7f070007;
+        public static final int title_activity_number_address_query=0x7f070010;
         public static final int title_activity_select_contact=0x7f07000c;
         public static final int title_activity_setting=0x7f070006;
         public static final int title_activity_setup1=0x7f070008;
