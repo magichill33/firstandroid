@@ -1,6 +1,7 @@
 package com.ly.mobilesafe;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -64,6 +66,7 @@ public class SplashActivity extends Activity {
 		tv_update_info = (TextView) findViewById(R.id.tv_update_info);
 		tv_splash_version.setText("版本号："+getVersionName());
 		boolean update = sp.getBoolean("update", false);
+		copyDB();
 		if(update)
 		{
 			checkUpdate();
@@ -282,6 +285,34 @@ public class SplashActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
+		}
+	}
+	
+	/**
+	 * //path 把address.db这个数据库拷贝到data/data/《包名》/files/address.db
+	 */
+	private void copyDB(){
+		try {
+			File file = new File(getFilesDir(),"address.db");
+			if(file.exists()&&file.length()>0)
+			{
+				Log.i(TAG, "数据存在，不拷贝");
+			}else{
+				InputStream is = getAssets().open("address.db");
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				while((len=is.read(buffer))!=-1)
+				{
+					fos.write(buffer,0,len);
+				}
+				is.close();
+				fos.close();
+				
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
