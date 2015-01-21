@@ -21,5 +21,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </com.ly.mobilesafe.ui.SettingItemView>
-
+ 	<com.ly.mobilesafe.ui.SettingItemView 
+        lying:title="设置号码归属地显示"
+        lying:desc_on="号码归属地显示已经打开"
+        lying:desc_off="号码归属地显示已经关闭"
+        android:id="@+id/siv_show_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.ly.mobilesafe.ui.SettingItemView>
+    <com.ly.mobilesafe.ui.SettingClickView
+        android:id="@+id/scv_changebg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.ly.mobilesafe.ui.SettingClickView>
+    <com.ly.mobilesafe.ui.SettingItemView 
+        lying:title="黑名单拦截设置"
+        lying:desc_on="黑名单拦截已经开启"
+        lying:desc_off="黑名单拦截已经关闭"
+        android:id="@+id/siv_callsms_safe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.ly.mobilesafe.ui.SettingItemView>
 </LinearLayout>
