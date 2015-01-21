@@ -18,13 +18,22 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+	<uses-permission android:name="android.permission.CALL_PHONE"/>
+	
+    <instrumentation 
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.ly.mobilesafe">
+    </instrumentation>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <uses-library android:name="android.test.runner"/>
         <activity
             android:name="com.ly.mobilesafe.SplashActivity"
             android:label="@string/app_name" >
@@ -68,6 +77,8 @@
         </activity>
 
         <service android:name="com.ly.mobilesafe.service.GPSService" />
+        <service android:name="com.ly.mobilesafe.service.AddressService" />
+        <service android:name="com.ly.mobilesafe.service.CallSmsSafeService"/>
 
         <receiver android:name="com.ly.mobilesafe.receiver.BootCompleteReceiver" >
             <intent-filter>
@@ -100,6 +111,10 @@
         <activity
             android:name="com.ly.mobilesafe.NumberAddressQueryActivity"
             android:label="@string/title_activity_number_address_query" >
+        </activity>
+        <activity
+            android:name="com.ly.mobilesafe.CallSmsSafeActivity"
+            android:label="@string/title_activity_call_sms_safe" >
         </activity>
     </application>
 
